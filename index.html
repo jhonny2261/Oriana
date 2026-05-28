@@ -147,10 +147,6 @@ body.nota .hide-on-nota { display:none !important; }
       </div>
     </div>
     <div class="form-row">
-      <div class="form-group hide-on-nota">
-        <label>Consignado</label>
-        <input id="consignado" type="text" placeholder="Consignado">
-      </div>
       <div class="form-group">
         <label>Transporte</label>
         <input id="transporte" type="text" value="No Asignado">
@@ -182,6 +178,10 @@ body.nota .hide-on-nota { display:none !important; }
     <div class="totals-box">
       <div class="totals-row"><span>Subtotal:</span><span id="subtotalVal">$0.00</span></div>
       <div class="totals-row"><span>I.T.B.M (7%):</span><span id="itbmVal">$0.00</span></div>
+      <div class="totals-row">
+        <span>Transporte:</span>
+        <span>$<input id="transporteVal" type="number" min="0" step="0.01" value="0" oninput="calcTotals()" style="width:70px;border:none;border-bottom:1px solid #ccc;text-align:right;font-size:13px;padding:0 2px;background:transparent;"></span>
+      </div>
       <div class="totals-row final"><span>TOTAL:</span><span id="totalVal">$0.00</span></div>
     </div>
   </div>
@@ -257,7 +257,8 @@ body.nota .hide-on-nota { display:none !important; }
       subtotal += qty * price;
     });
     var itbm = subtotal * 0.07;
-    var total = subtotal + itbm;
+    var transporte = parseFloat(document.getElementById('transporteVal').value) || 0;
+    var total = subtotal + itbm + transporte;
     document.getElementById('subtotalVal').textContent = '$' + subtotal.toFixed(2);
     document.getElementById('itbmVal').textContent = '$' + itbm.toFixed(2);
     document.getElementById('totalVal').textContent = '$' + total.toFixed(2);
