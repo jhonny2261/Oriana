@@ -211,7 +211,7 @@ body.nota .hide-on-nota { display:none !important; }
 
 <script>
   document.getElementById('docFecha').valueAsDate = new Date();
-  for(var i=0;i<10;i++) addRow();
+  addRow();
 
   function addRow() {
     var tbody = document.getElementById('prodBody');
@@ -283,7 +283,7 @@ body.nota .hide-on-nota { display:none !important; }
     document.getElementById('consignado').value='';
     document.getElementById('transporte').value='No Asignado';
     document.getElementById('prodBody').innerHTML='';
-    for(var i=0;i<10;i++) addRow();
+    addRow();
     calcTotals();
   }
 
