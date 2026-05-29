@@ -48,6 +48,8 @@ tbody tr:nth-child(even) { background:#f4f8fc; }
 tbody td { padding:4px 5px; border-bottom:1px solid #e8e8e8; vertical-align:middle; }
 tbody td input { width:100%; border:none; background:transparent; font-size:12px; padding:2px 3px; font-family:Arial; }
 tbody td input:focus { background:#fffde7; outline:none; border-radius:3px; }
+tbody td textarea { width:100%; border:none; background:transparent; font-size:12px; padding:2px 3px; font-family:Arial; resize:none; overflow:hidden; line-height:1.4; min-height:36px; }
+tbody td textarea:focus { background:#fffde7; outline:none; border-radius:3px; }
 .td-no { width:32px; text-align:center; color:#999; font-weight:bold; font-size:11px; }
 .td-mat { width:90px; }
 .td-qty { width:46px; }
@@ -220,7 +222,7 @@ body.nota .hide-on-nota { display:none !important; }
     tr.innerHTML =
       '<td class="td-no">' + rowNum + '</td>' +
       '<td class="td-mat"><input type="text" placeholder="Codigo"></td>' +
-      '<td><input type="text" placeholder="Descripcion del producto"></td>' +
+      '<td><textarea placeholder="Descripcion del producto" rows="2" oninput="this.style.height=\'auto\';this.style.height=this.scrollHeight+\'px\'"></textarea></td>' +
       '<td class="td-qty"><input type="number" min="0" placeholder="0" oninput="calcRow(this)" style="text-align:center"></td>' +
       '<td class="td-price"><input type="number" min="0" step="0.01" placeholder="0.00" oninput="calcRow(this)" style="text-align:right"></td>' +
       '<td class="td-total"><span class="row-total">-</span></td>' +
