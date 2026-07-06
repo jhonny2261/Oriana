@@ -293,6 +293,17 @@ body.nota .hide-on-nota { display:none !important; }
     var btn = event.currentTarget;
     btn.textContent = 'Generando...';
     btn.disabled = true;
+
+    // Reemplazar textareas por divs para que html2canvas capture el texto completo
+    var swaps = [];
+    document.querySelectorAll('#prodBody textarea').forEach(function(ta) {
+      var div = document.createElement('div');
+      div.style.cssText = 'white-space:pre-wrap;font-size:12px;font-family:Arial;padding:2px 3px;word-break:break-word;line-height:1.4;min-height:' + ta.scrollHeight + 'px;';
+      div.textContent = ta.value;
+      ta.parentNode.replaceChild(div, ta);
+      swaps.push({ div: div, ta: ta });
+    });
+
     try {
       var el = document.getElementById('docContent');
       var canvas = await html2canvas(el, { scale:2, useCORS:true });
@@ -305,6 +316,8 @@ body.nota .hide-on-nota { display:none !important; }
       var tipo = document.getElementById('docType').value;
       pdf.save(tipo + '_' + docNum + '.pdf');
     } finally {
+      // Restaurar textareas
+      swaps.forEach(function(s) { s.div.parentNode.replaceChild(s.ta, s.div); });
       btn.innerHTML = '&#128196; Generar PDF';
       btn.disabled = false;
     }
